@@ -5,28 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TinyTrails 404</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<!-- 新增：Babel，用来解析JSX！！ -->
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 <style>
 *{font-family:'Inter',sans-serif;}
 .bg-gradient-custom{background:linear-gradient(#FF8233,#FDAC55);}
 .bg-404-text{
   font-size:clamp(12rem,35vw,22rem);
-  color:#ffffff;
   font-weight:900;
-  line-height:1;
-  letter-spacing:-0.08em;
-  white-space:nowrap;
-  opacity:0.15;
+  color:rgba(255,255,255,0.18);
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  z-index:0;
 }
 @keyframes float{
   0%,100%{transform:translateY(0px);}
-  50%{transform:translateY(-16px);}
+  50%{transform:translateY(-12px);}
 }
-.float-anim{animation:float 4s ease-in-out infinite;}
+.float-anim{
+  animation: float 3s ease-in-out infinite;
+}
 </style>
 </head>
 <body>
@@ -35,23 +37,27 @@
 const { createRoot } = ReactDOM;
 
 function App(){
+  const goHome = ()=>{
+    window.location.href="/tiny-trails-404/";
+  }
+  const goBack = ()=>{
+    window.history.back();
+  }
   return (
     <div className="w-full h-screen overflow-hidden flex flex-col bg-gradient-custom items-center justify-center relative">
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="bg-404-text">404</div>
-      </div>
+      <div className="bg-404-text">404</div>
       <div className="float-anim text-center px-6 relative z-10">
         <h1 className="text-white text-5xl md:text-7xl font-black mb-4">Oops!</h1>
         <h2 className="text-white text-2xl md:text-3xl font-bold mb-6">This page wandered away</h2>
-        <p className="text-white/90 text-lg max-w-md mx-auto mb-10">
-          TinyTrails lost this path. Let’s head back home and explore again!
+        <p className="text-white/80 text-lg max-w-md mx-auto mb-10">
+          TinyTrails lost this path. Let's head back home and explore again!
         </p>
         <div className="flex gap-4 justify-center flex-wrap">
-          <button className="bg-white text-orange-500 font-bold px-6 py-3 rounded-full flex items-center gap-2">
+          <button onClick={goHome} className="bg-white text-orange-500 font-bold px-6 py-3 rounded-full flex items-center gap-2 hover:scale-105 transition-transform">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
             Go Home
           </button>
-          <button className="bg-white/20 text-white border border-white/40 font-bold px-6 py-3 rounded-full flex items-center gap-2">
+          <button onClick={goBack} className="bg-white/20 text-white border border-white/40 font-bold px-6 py-3 rounded-full flex items-center gap-2 hover:scale-105 transition-transform">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
             Go Back
           </button>
